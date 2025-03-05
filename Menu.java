@@ -1,31 +1,60 @@
 import java.util.Scanner;
 
 public class Menu {
+    private String titolo;
+    private String autore;
+    private int copie;
 
     // Metodo per il menu principale
-    public void mostraMenuPrincipale(Scanner scanner) {
+    public void mostraMenuPrincipale(Scanner scanner, Biblioteca biblioteca) throws InterruptedException {
         int scelta;
+
         boolean exitMainMenu = false;
 
         while (!exitMainMenu) {
+            clear();
             stampaMenuPrincipale();
             scelta = getInt(scanner);
 
             switch (scelta) {
                 case 1:
-
+                    biblioteca.stampaLibriDisponibili();
                     break;
+
                 case 2:
+                    System.out.print("Inserisci il titolo del libro: ");
+                    titolo = controlloInputStringhe(scanner);
 
+                    System.out.print("Inserisci l'autore del libro: ");
+                    autore = controlloInputStringhe(scanner);
+
+                    System.out.print("Inserisci il numero di copie del libro: ");
+                    copie = getInt(scanner);
+
+                    biblioteca.aggiungiLibro(titolo, autore, copie);
                     break;
+
                 case 3:
+                    System.out.print("Inserisci il titolo del libro da rimuovere: ");
+                    titolo = controlloInputStringhe(scanner);
 
+                    biblioteca.rimuoviLibro("1984");
                     break;
+
                 case 4:
+                    System.out.print("Inserisci il titolo del libro da richiedere in prestito: ");
+                    titolo = controlloInputStringhe(scanner);
+                    biblioteca.prestaLibro(titolo);
                     break;
+
                 case 5:
+                    System.out.print("Inserisci il titolo del libro da restituire: ");
+                    titolo = controlloInputStringhe(scanner);
+
+                    biblioteca.restituisciLibro(titolo);
                     break;
-                case 6:
+
+                case 0:
                     System.out.println("ARRIVEDERCI CARO CIUCCIO E SEMPRE FORZA NAPOLI!!!");
                     exitMainMenu = true;
                     break;
@@ -59,5 +88,22 @@ public class Menu {
                 System.out.println("Errore: inserire un numero intero valido.");
             }
         }
+    }
+
+    // Metodo per controllare che l'input stringa non sia vuoto
+    public static String controlloInputStringhe(Scanner scanner) {
+        while (true) {
+            String valore = scanner.nextLine().trim();
+            if (!valore.isEmpty()) {
+                return valore; // Restituisce il valore solo se non è vuoto
+            }
+            System.out.print("Input non valido. Inserisci un testo: ");
+        }
+    }
+
+    private static void clear() throws InterruptedException {
+        Thread.sleep(3000);
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

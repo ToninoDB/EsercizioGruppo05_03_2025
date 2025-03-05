@@ -1,5 +1,3 @@
-package OTTAVALEZIONE.EserciziPomeriggio;
-
 import java.util.ArrayList;
 
 public class Biblioteca {
@@ -50,8 +48,8 @@ public class Biblioteca {
         }
         for (Libro libro : catalogo) {
             if (libro.getTitolo().equalsIgnoreCase(titolo)) {
-                if (libro.getCopieDisponibili() > 0) {
-                    libro.prestaCopia();
+                if (libro.getCopie_disp() > 0) {
+                    libro.prestito();
                     System.out.println("Hai preso in prestito: " + libro.getTitolo());
                 } else {
                     System.out.println("Libro non disponibile per il prestito.");
@@ -70,8 +68,8 @@ public class Biblioteca {
         }
         for (Libro libro : catalogo) {
             if (libro.getTitolo().equalsIgnoreCase(titolo)) {
-                if (libro.getCopieInPrestito() > 0) {
-                    libro.restituisciCopia();
+                if (libro.getCopie_prest() > 0) {
+                    libro.consegna();
                     System.out.println("Hai restituito: " + libro.getTitolo());
                 } else {
                     System.out.println("Errore: Nessuna copia di questo libro è attualmente in prestito.");
