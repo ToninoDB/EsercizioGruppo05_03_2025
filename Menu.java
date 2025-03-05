@@ -9,7 +9,7 @@ public class Menu {
 
         while (!exitMainMenu) {
             stampaMenuPrincipale();
-            scelta = getInt(scanner, null);
+            scelta = getInt(scanner);
 
             switch (scelta) {
                 case 1:
@@ -25,7 +25,7 @@ public class Menu {
                     break;
                 case 5:
                     break;
-                case 6:
+                case 0:
                     System.out.println("ARRIVEDERCI CARO CIUCCIO E SEMPRE FORZA NAPOLI!!!");
                     exitMainMenu = true;
                     break;
@@ -51,10 +51,9 @@ public class Menu {
     }
 
     // Metodo per il controllo di un int
-    public int getInt(Scanner scanner, String message) {
+    public int getInt(Scanner scanner) {
         while (true) {
             try {
-                System.out.print(message);
                 return Integer.parseInt(scanner.nextLine().trim());
             } catch (NumberFormatException e) {
                 System.out.println("Errore: inserire un numero intero valido.");
